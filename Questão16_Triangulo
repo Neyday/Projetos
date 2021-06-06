@@ -1,0 +1,28 @@
+package atividades;
+
+import java.util.Locale;
+import java.util.Scanner;
+
+public class Q16 {
+
+	public static void main(String[] args) {
+			Scanner sc = new Scanner(System.in);
+			Locale.setDefault(Locale.US);
+			
+			double base, altura, area;
+			
+			System.out.println("informe a base e a altura do triangulo em cm: ");
+			base = sc.nextDouble();
+			altura = sc.nextDouble();
+			
+			area = (base * altura)/2;
+			
+			if(base > 0 && altura > 0)  {
+				System.out.print("area do triangulo: "+area);
+			}else {
+				System.out.print("dados invalidos!!");
+			}
+			
+			sc.close();
+	}
+}
