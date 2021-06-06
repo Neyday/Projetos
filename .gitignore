@@ -1,23 +1,102 @@
-# Compiled class file
-*.class
+package atividades;
 
-# Log file
-*.log
+import java.util.Locale;
+import java.util.Scanner;
 
-# BlueJ files
-*.ctxt
+public class Q15 {
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+	public static void main(String[] args) {
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+		
+		double custoEstoque = 0, imposto, totalImposto = 0, preçoUnitario, totalEstoque = 0, preçoFinal, mediaAdicionais, maior = 0, menor = Double.MAX_VALUE;
+		int barato = 0, normal = 0, caro = 0;
+		char r, c;
+		
+		for(int i = 1; i <=12; i++) {
+			//entrada
+			System.out.println("Coloque o preço unitário do produto, com sua refrigeração (S/N) e categoria(A/L/V)");
+			preçoUnitario = sc.nextDouble();
+			r = sc.next().charAt(0);
+			c = sc.next().charAt(0);
+			
+			System.out.println("---------------------");
+			//estocagem
+			if(preçoUnitario <=20 && c == 'A'){
+				custoEstoque = 2;
+			}else if(preçoUnitario <=20 && c == 'L'){
+				custoEstoque = 3;
+			}else if(preçoUnitario <=20 && c == 'V'){
+				custoEstoque = 4;
+			}
+			if(preçoUnitario >20 && preçoUnitario <=50 && r == 'S' ){
+				custoEstoque = 6;
+			}else if(preçoUnitario >20 && preçoUnitario <=50 && r == 'N'){
+				custoEstoque = 0;
+			}
+			if(preçoUnitario >50 && r == 'S' && c == 'A'){
+				custoEstoque = 5;
+			}else if(preçoUnitario >50 && r == 'S' && c == 'L'){
+				custoEstoque = 2;
+			}else if(preçoUnitario >50 && r == 'S' && c == 'V'){
+				custoEstoque = 4;
+			}else if(preçoUnitario >50 && r == 'N' && c == 'A'){
+				custoEstoque = 0;
+			}else if(preçoUnitario >50 && r == 'N' && c == 'V'){
+				custoEstoque = 0;
+			}else if(preçoUnitario >50 && r == 'N' && c == 'L'){
+				custoEstoque = 1;
+			}
+			totalEstoque = totalEstoque + custoEstoque;
+			System.out.println("Custo de estocagem: "+custoEstoque);
+			
+			//imposto
+			if(c == 'A' && r == 'S') {
+				imposto = preçoUnitario*4/100;
+				totalImposto = totalImposto + imposto;
+			}else {
+				imposto = preçoUnitario*2/100;
+				totalImposto = totalImposto + imposto;
+			}
+			System.out.println("Imposto: "+imposto);
+			
+			preçoFinal = preçoUnitario + custoEstoque + imposto;
+			System.out.println("O preço final é: "+preçoFinal);
+			
+			//classificação
+			if(preçoFinal <= 20) {
+				System.out.println("Barato");
+				System.out.println("---------------------");
+				barato = barato + 1;
+			}else if(preçoFinal > 20 && preçoFinal <= 100){
+				System.out.println("Normal");
+				System.out.println("---------------------");
+				normal = normal + 1;
+			}else if(preçoFinal > 100) {
+				System.out.println("caro");
+				System.out.println("---------------------");
+				caro = caro + 1;
+					}
+			//maior e menor
+			if(maior < preçoFinal) {
+				maior = preçoFinal;
+				}
+			
+			if(preçoFinal < menor) {
+				menor = preçoFinal;
+			}
+		}
+		
+		mediaAdicionais = totalEstoque / 12 + totalImposto / 12;
+		System.out.println("---------------------");
+		System.out.println("Media dos valores adicionais: "+String.format("%.2f", mediaAdicionais));
+		System.out.println("Maior preço: "+maior);
+		System.out.println("Menor preço: "+menor);
+		System.out.println("Total de impostos: "+String.format("%.2f", totalImposto));
+		System.out.println("Quantidade de produtos baratos: "+barato);
+		System.out.println("Quantidade de produtos normais: "+normal);
+		System.out.println("Quantidade de produtos caros: "+caro);
+		
+		sc.close();
+	}
+}
