@@ -1,0 +1,29 @@
+package atividades;
+
+import java.util.Locale;
+import java.util.Scanner;
+
+public class Q17 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		Locale.setDefault(Locale.US);
+		
+		double salarioCarlos, salarioJoao;
+		int i = 1;
+		System.out.println("informe o salário de Carlos: ");
+		salarioCarlos = sc.nextDouble();
+		salarioJoao = salarioCarlos/3;
+		
+		do {
+			salarioCarlos = salarioCarlos + (salarioCarlos*2/100);
+			salarioJoao = salarioJoao + (salarioJoao*5/100);
+			i = i + 1;
+			i++;
+		}while(salarioJoao < salarioCarlos);
+		System.out.println("quantidade de meses: "+i);
+		System.out.println("salario de João: "+String.format("%.2f", salarioJoao));
+		System.out.println("salario de Carlos: "+String.format("%.2f", salarioCarlos));
+		sc.close();
+	}
+}
